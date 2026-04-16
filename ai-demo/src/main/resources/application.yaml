@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ai-demo
+  ai:
+    chat:
+      client:
+        enabled: false
+    ollama:
+      chat:
+        options:
+          model: llama3.2:3b
+    openai:
+      api-key: ${OPENAI_API_KEY:DummyKey}
