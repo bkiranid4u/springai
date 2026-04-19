@@ -1,0 +1,16 @@
+meta {
+  name: prompt01
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/api/prompt-chat/email?customerName=Kiran Kumar&customerMessage=I am not able to access my account, it says account locked, please help
+  body: none
+  auth: none
+}
+
+params:query {
+  customerName: Kiran Kumar
+  customerMessage: I am not able to access my account, it says account locked, please help
+}

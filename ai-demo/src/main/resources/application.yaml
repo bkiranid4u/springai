@@ -8,6 +8,10 @@ spring:
     ollama:
       chat:
         options:
-          model: llama3.2:3b
+          model: llama3.2:1b
     openai:
       api-key: ${OPENAI_API_KEY:DummyKey}
+logging:
+  level:
+    root: INFO
+    "[org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor]": DEBUG
