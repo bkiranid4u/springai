@@ -1,18 +1,36 @@
 package com.kiran4dev.ai_demo.config;
 
+import java.util.List;
+
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.kiran4dev.ai_demo.advisors.TokenAuditAdvisor;
+
 @Configuration
 public class ChatClientConfig {
 
     @Bean
+    @Qualifier("openAiChatClient")
     public ChatClient openAiChatClient(OpenAiChatModel openAiChatModel) {
-        return ChatClient.create(openAiChatModel);
+        ChatOptions chatOptions = ChatOptions
+            .builder()
+            .model("gpt-4.1-mini")
+            .temperature(0.8)
+            .build();
+
+        return ChatClient
+                .builder(openAiChatModel)
+            .defaultOptions(chatOptions)
+            .defaultAdvisors(List.of(new SimpleLoggerAdvisor(), new TokenAuditAdvisor()))
+            .defaultUser("How Can I help you?")
+            .build();
     }
 
     @Bean
@@ -33,4 +51,5 @@ public class ChatClientConfig {
         return builder.build();
 
     }
+
 }

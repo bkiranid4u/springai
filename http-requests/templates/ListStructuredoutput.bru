@@ -1,0 +1,15 @@
+meta {
+  name: ListStructuredoutput
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/structured-output/chat-list?message=Provide me the cities details in USA?
+  body: none
+  auth: none
+}
+
+params:query {
+  message: Provide me the cities details in USA?
+}
