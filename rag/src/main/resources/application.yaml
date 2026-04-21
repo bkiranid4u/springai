@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: rag
+  docker:
+    compose:
+      file:
+      - classpath:docker/compose.yaml
+      stop:
+        command: down
+  ai:
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            schema: classpath:schema/schema-h2db.sql
+      client:
+        enabled: false
+    openai:
+      api-key: ${OPENAI_API_KEY:DummyKey}
+    vectorstore:
+      qdrant:
+        initialize-schema: true
+        host: localhost
+        port: 6334
+        collection-name: spring-ai-rag-collection
+  datasource:
+    url: jdbc:h2:file:~/.h2/chatdb;AUTO_SERVER=true
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    root: INFO
+    "[org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor]": DEBUG
