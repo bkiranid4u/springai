@@ -1,0 +1,16 @@
+meta {
+  name: ChatMemory01
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:8080/api/chat-memory/message?username=test4u&message=My Name is Kiran
+  body: none
+  auth: none
+}
+
+params:query {
+  username: test4u
+  message: My Name is Kiran
+}
